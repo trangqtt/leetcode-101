@@ -1,18 +1,15 @@
 function sortArrayByParityII(nums: number[]): number[] {
-  const arr: number[] = [nums[0]];
-  nums.reduce((acc, num) => {
-    if (num % 2 === 0) {
-      arr.unshift(num);
-    } else {
-      arr.push(num);
-    }
-    return acc;
-  });
+  let e = 0;
+  let o = 1;
 
-  for (let curr = 1; curr < arr.length / 2; curr += 2) {
-    var temp = arr[curr];
-    arr[curr] = arr[arr.length - 1 - curr];
-    arr[arr.length - 1 - curr] = temp;
+  while (e < nums.length) {
+    if (nums[e] % 2 !== 0) {
+      while (nums[o] % 2 !== 0) o += 2;
+      var temp = nums[e];
+      nums[e] = nums[o];
+      nums[o] = temp;
+    }
+    e += 2;
   }
-  return arr;
+  return nums;
 }
